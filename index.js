@@ -32,35 +32,32 @@ const getEvent = async (id) => {
 // === Components ===
 /** Detailed information about the selected party */
 function PartyDetails(sp) {
+
   if (!selectedParty) {
     const $p = document.createElement("p");
     $p.textContent = "Please select a party to learn more.";
     return $p;
   }
 
-  const $party = document.createElement("section");
+  const $party = document.querySelector("#selected");
   $party.classList.add("party");
+  console.log("PARTY DETAILS", sp);
   $party.innerHTML = `
     <h3>${sp.name} #${sp.id}</h3>
-    <figure>
-      <img alt=${sp.name} src=${sp.imgUrl} />
-    </figure>
     <p>${sp.description}</p>
-    <button>Remove artist</button>
+    <button>Remove Party</button>
   `;
-
   return $party;
 }
 
 /** Party name that shows more details about the party when clicked */
 function PartyListItem(party) {
   const $li = document.createElement("li");
-  console.log(party)
+  console.log("PARTY LI", party)
   $li.innerHTML = `
     <a href="#selected">${party.name}</a>
   `;
   $li.addEventListener("click", () => {
-    getEvent(party.id)
     PartyDetails(party)
   });
   
